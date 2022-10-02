@@ -1,0 +1,64 @@
+import { CheckCircleOutline } from "@mui/icons-material";
+import {
+  Card,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
+import { useState } from "react";
+import styles from "./radioFilter.module.scss";
+enum SortingEnum {
+  PriceAsc,
+  PriceDesc,
+  DateDesc,
+  DateAsc,
+}
+interface Sorting {
+  id: SortingEnum;
+  label: string;
+}
+const filterData: Sorting[] = [
+  { id: SortingEnum.PriceAsc, label: "Price low to high" },
+  { id: SortingEnum.PriceDesc, label: "Price high to low" },
+  { id: SortingEnum.DateDesc, label: "New to old" },
+  { id: SortingEnum.DateAsc, label: "Old to new" },
+];
+export const RadioFilter: React.FC = () => {
+  const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(
+    null
+  );
+  const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedSort(Number(event.target.value));
+  };
+  console.log("selectedSort", selectedSort);
+  return (
+    <Grid item xs={12}>
+      <div className={styles.title}>Sorting</div>
+      <Card className={styles.container} sx={{ minWidth: "100%" }}>
+        <div className={styles.formContainer}>
+          <FormControl component={"fieldset"}>
+            <RadioGroup
+              aria-label="gender"
+              name="radio-filter"
+              value={selectedSort}
+              onChange={handleSortChange}
+            >
+              {filterData.map((filter, index) => {
+                return (
+                  <FormControlLabel
+                    key={index}
+                    value={filter.id}
+                    label={filter.label}
+                    control={<Radio checkedIcon={<CheckCircleOutline />} />}
+                  />
+                );
+              })}
+            </RadioGroup>
+          </FormControl>
+        </div>
+      </Card>
+    </Grid>
+  );
+};

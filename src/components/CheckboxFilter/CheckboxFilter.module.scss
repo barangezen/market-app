@@ -1,0 +1,18 @@
+.title {
+  color: #697488;
+}
+.container {
+  margin-top: 10px;
+  height: 274px;
+  .filterContainer {
+    margin: 10px;
+    .textField {
+      width: 100% !important;
+    }
+    .formContainer {
+      height: 350px;
+      overflow: auto;
+      margin-top: 10px;
+    }
+  }
+}
