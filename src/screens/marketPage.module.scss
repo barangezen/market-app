@@ -1,0 +1,29 @@
+.container {
+    width: "90%";
+    margin-left: 130px;
+    margin-top: 125px;
+    .productsTitle {
+        font-size: 24px;
+        color: #697488
+    }
+    .productsTypeContainer {
+        margin-top: 10px;
+    }
+    .productsTypes {
+        margin-top: 10px;
+        .type {
+            background: #F2F0FD!important;
+            color: #1EA4CE!important;
+            border: none!important;
+            border-radius: 2px!important;
+        }
+        .activeType {
+            color: #F2F0FD!important;
+            background: #1EA4CE!important;
+        }
+    }
+    .pagination {
+        width: 350px;
+        margin: 0 auto;
+    }
+}
