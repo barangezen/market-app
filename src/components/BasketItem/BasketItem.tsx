@@ -1,11 +1,11 @@
 import { FormControl, Input, InputAdornment } from "@mui/material";
 import styles from "./BasketItem.module.scss";
-export interface BasketItemProps {
+export interface IBasketItem {
     productName: string;
     productPrice: number;
     productQuantity: number;
 }
-export const BasketItem: React.FC<BasketItemProps> = ({
+export const BasketItem: React.FC<IBasketItem> = ({
     productName,
     productPrice,
     productQuantity

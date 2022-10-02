@@ -8,13 +8,9 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { useState } from "react";
-import styles from "./radioFilter.module.scss";
-enum SortingEnum {
-  PriceAsc,
-  PriceDesc,
-  DateDesc,
-  DateAsc,
-}
+import { SortingEnum } from "../../globals/enums/enums";
+import styles from "./RadioFilter.module.scss";
+
 interface Sorting {
   id: SortingEnum;
   label: string;

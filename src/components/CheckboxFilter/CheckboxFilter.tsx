@@ -7,14 +7,14 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { IBrand, ITag } from "../ProductFilter/productFilter";
+import { IBrand, ITag } from "../../globals/enums/models";
 import styles from "./CheckboxFilter.module.scss";
-interface FilterItems {
+interface IFilter {
   items: IBrand[] | ITag[];
   title: string;
   placeholder: string;
 }
-export const CheckboxFilter: React.FC<FilterItems> = ({
+export const CheckboxFilter: React.FC<IFilter> = ({
   items,
   title,
   placeholder,
@@ -31,6 +31,7 @@ export const CheckboxFilter: React.FC<FilterItems> = ({
       });
     }
   };
+  console.log('selected', selectedItems)
   return (
     <Grid item xs={12}>
       <div className={styles.title}>{title}</div>
