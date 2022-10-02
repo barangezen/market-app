@@ -24,14 +24,15 @@ export const Header: React.FC = () => {
         <ShoppingBag /> ₺39,97
       </Button>
       <Menu
+        id="basket-menu"
+        disableScrollLock={true}
         anchorEl={anchorElNav}
         PaperProps={{
           style: {
             border: "7px solid #1EA4CE",
-            marginTop: '50px'
+            marginTop: "50px",
           },
         }}
-        id="basket-menu"
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         open={Boolean(anchorElNav)}

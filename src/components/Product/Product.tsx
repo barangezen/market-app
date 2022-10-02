@@ -1,16 +1,8 @@
 import styles from './Product.module.scss';
 import ShirPoster from '../../assets/shirt.png'
 import MugPoster from '../../assets/mug.png';
-export interface IProduct {
-    tags: Array<string>;
-    price: number;
-    name: string;
-    description: string;
-    slug: string;
-    added: number;
-    manufacturer: string;
-    itemType: string;
-}
+import { IProduct } from '../../globals/enums/models';
+
 export interface ProductItem {
     item: IProduct;
 }

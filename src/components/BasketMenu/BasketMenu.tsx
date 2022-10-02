@@ -1,7 +1,7 @@
-import { BasketItem, BasketItemProps } from "../BasketItem/BasketItem";
+import { BasketItem, IBasketItem } from "../BasketItem/BasketItem";
 import styles from "./BasketMenu.module.scss";
 export const BasketMenu: React.FC = () => {
-  const basket: BasketItemProps[] = [
+  const basket: IBasketItem[] = [
     {
       productName: "Motul C4 Motorsiklet Zincir Yağı ",
       productPrice: 167,
@@ -21,9 +21,10 @@ export const BasketMenu: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.itemContainer}>
-        {basket.map((item) => {
+        {basket.map((item, index) => {
           return (
             <BasketItem
+              key={index}
               productName={item.productName}
               productPrice={item.productPrice}
               productQuantity={item.productQuantity}
