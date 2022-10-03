@@ -7,10 +7,10 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { IBrand, ITag } from "../../globals/enums/models";
+import { IBrand } from "../../globals/enums/models";
 import styles from "./CheckboxFilter.module.scss";
 interface IFilter {
-  items: IBrand[] | ITag[];
+  items: IBrand[] | string[] | null;
   title: string;
   placeholder: string;
 }
@@ -31,7 +31,6 @@ export const CheckboxFilter: React.FC<IFilter> = ({
       });
     }
   };
-  console.log('selected', selectedItems)
   return (
     <Grid item xs={12}>
       <div className={styles.title}>{title}</div>
@@ -44,7 +43,7 @@ export const CheckboxFilter: React.FC<IFilter> = ({
               placeholder={placeholder}
             />
             <div className={styles.formContainer}>
-              {items.map((item: IBrand | ITag, index: any) => {
+              {items && items.map((item: any, index: any) => {
                 return (
                   <FormGroup key={index}>
                     <FormControlLabel
@@ -54,7 +53,7 @@ export const CheckboxFilter: React.FC<IFilter> = ({
                           onChange={(e) => handleSelectChange(item)}
                         />
                       }
-                      label={item.name}
+                      label={item.name ? item.name : item}
                     />
                   </FormGroup>
                 );
