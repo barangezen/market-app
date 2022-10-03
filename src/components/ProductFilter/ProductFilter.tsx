@@ -1,10 +1,10 @@
 import { Grid } from "@mui/material";
-import { IBrand, ITag } from "../../globals/enums/models";
+import { IBrand } from "../../globals/enums/models";
 import { CheckboxFilter } from "../CheckboxFilter/CheckboxFilter";
 import { RadioFilter } from "../RadioFilter/RadioFilter";
 interface IProductFilter {
-  brands: IBrand[];
-  tags: ITag[];
+  brands: IBrand[] | null;
+  tags: string[] | null;
 }
 export const ProductFilter: React.FC<IProductFilter> = ({
   brands,

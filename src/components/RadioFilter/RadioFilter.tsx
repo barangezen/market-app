@@ -28,7 +28,6 @@ export const RadioFilter: React.FC = () => {
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(Number(event.target.value));
   };
-  console.log("selectedSort", selectedSort);
   return (
     <Grid item xs={12}>
       <div className={styles.title}>Sorting</div>

@@ -13,12 +13,12 @@ export interface ITag {
 }
 
 export interface IProduct {
-  tags: Array<string>;
+  tags: string[];
   price: number;
   name: string;
   description: string;
   slug: string;
-  added: number;
+  added: any;
   manufacturer: string;
   itemType: string;
 }
