@@ -7,28 +7,35 @@ import {
   TextField,
 } from "@mui/material";
 import { useState } from "react";
-import { IBrand } from "../../globals/enums/models";
+import { setBrands, setTags } from "../../features/FilterSlice/FilterSlice";
+import { useAppDispatch, useAppSelector } from "../../store";
 import styles from "./CheckboxFilter.module.scss";
 interface IFilter {
-  items: IBrand[] | string[] | null;
+  items: string[] | null;
   title: string;
   placeholder: string;
+  type: "tags" | "brands";
 }
 export const CheckboxFilter: React.FC<IFilter> = ({
   items,
   title,
   placeholder,
+  type,
 }) => {
-  const [selectedItems, setSelectedSelectedItems] = useState<any[]>([]);
-  const handleSelectChange = (item: any) => {
-    if (selectedItems.includes(item)) {
-      setSelectedSelectedItems(
-        selectedItems.filter((currentItem) => currentItem !== item)
+  const [searchFilter, setSearchFilter] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const filters = useAppSelector((state) => state.filters);
+  const reduxSelectedItems = filters[type];
+  const handleSelectChange = (item: string) => {
+    const setSelectedItems = type === "tags" ? setTags : setBrands;
+    if (reduxSelectedItems.includes(item)) {
+      dispatch(
+        setSelectedItems(
+          reduxSelectedItems.filter((currentItem) => currentItem !== item)
+        )
       );
     } else {
-      setSelectedSelectedItems((prevState) => {
-        return [...prevState, item];
-      });
+      dispatch(setSelectedItems([...reduxSelectedItems, item]));
     }
   };
   return (
@@ -41,23 +48,25 @@ export const CheckboxFilter: React.FC<IFilter> = ({
               className={styles.textField}
               variant="outlined"
               placeholder={placeholder}
+              onChange={(ev) => {setSearchFilter(ev.target.value)}}
             />
             <div className={styles.formContainer}>
-              {items && items.map((item: any, index: any) => {
-                return (
-                  <FormGroup key={index}>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={selectedItems.includes(item)}
-                          onChange={(e) => handleSelectChange(item)}
-                        />
-                      }
-                      label={item.name ? item.name : item}
-                    />
-                  </FormGroup>
-                );
-              })}
+              {items &&
+                items.filter((item) => item.toLocaleUpperCase().includes(searchFilter.toLocaleUpperCase())).map((item: any, index: any) => {
+                  return (
+                    <FormGroup key={index}>
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            checked={reduxSelectedItems.includes(item)}
+                            onChange={(e) => handleSelectChange(item)}
+                          />
+                        }
+                        label={item.name ? item.name : item}
+                      />
+                    </FormGroup>
+                  );
+                })}
             </div>
           </div>
         </div>

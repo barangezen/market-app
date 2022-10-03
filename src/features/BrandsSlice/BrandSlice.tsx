@@ -3,7 +3,7 @@ import axios from "axios";
 import { IBrand } from "../../globals/enums/models";
 
 interface IBrandsState {
-    data: IBrand[] | null;
+    data: string[] | null;
     loading: boolean;
     error: string
 }
@@ -16,7 +16,9 @@ const initialState: IBrandsState = {
 
 export const fetchBrands = createAsyncThunk("fetchBrands", async () => {
     const response = await axios.get<IBrand[]>("http://localhost:3000/companies");
-    return response.data;
+    return response.data.map((brand) => {
+        return brand.slug;
+    })
 })
 
 const brandsSlice = createSlice({
@@ -28,7 +30,7 @@ const brandsSlice = createSlice({
             state.loading = true;
             state.error = "";
         })
-        builder.addCase(fetchBrands.fulfilled, (state, action: PayloadAction<IBrand[]>) => {
+        builder.addCase(fetchBrands.fulfilled, (state, action: PayloadAction<string[]>) => {
             state.data = action.payload;
             state.loading = false;
         })

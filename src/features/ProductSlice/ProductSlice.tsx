@@ -24,7 +24,7 @@ export const fetchProducts  = createAsyncThunk("fetchProducts", async (filterVal
   const filteredData: IProduct[] = (filterData(filterValue, data));
   const filteredProducts: IProductsState = {
     data: filteredData.slice((filterValue.index -1) * filterValue.pageSize, (filterValue.index -1) * filterValue.pageSize + filterValue.pageSize),
-    count: filterData.length,
+    count: filteredData.length,
     itemTypes: productTypes,
     loading: false,
     error: ''

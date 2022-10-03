@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { ProductContent } from "../components/ProductContent/ProductContent";
 import { ProductFilter } from "../components/ProductFilter/ProductFilter";
 import { fetchBrands } from "../features/BrandsSlice/BrandSlice";
+import { setItemType } from "../features/FilterSlice/FilterSlice";
 import { fetchProducts } from "../features/ProductSlice/ProductSlice";
 import { fetchTags } from "../features/TagsSlice/TagsSlice";
-import { IFilterTypes, IProductFilters } from "../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../store";
 import styles from "./MarketPage.module.scss";
 interface TypeProps {
@@ -15,26 +15,32 @@ interface TypeProps {
 }
 
 export const Market: React.FC = () => {
+  const products = useAppSelector((state) => state.products);
+  const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.products.data);
-  console.log(products);
   const pageSize: number = 16;
   const [page, setPage] = useState<number>(1);
-  const [filters, setFilters] = useState<IProductFilters>({
-    brands: [],
-    tags: [],
-  });
-  const [productsType, setProductsType] = useState("mug");
+  const [selectedProductType, setSelectedProductType] = useState('');
   const productTypes: TypeProps[] = [
     { id: "1", label: "Mug", type: "mug" },
     { id: "2", label: "Shirt", type: "shirt" },
   ];
   const handleChangeType = (type: string) => {
-    setProductsType(type);
+    if(selectedProductType === type) {
+      setSelectedProductType('');
+      dispatch(setItemType(''))
+    } else {
+      setSelectedProductType(type);
+      dispatch(setItemType(type))
+    }
+  
   };
-  const handleFilters = (brands: string[], tags: string[], sortType?: number) => {
-    setFilters({ brands, tags, productsType , sortType})
-  }
+  const handleChangePage = (
+    event: React.ChangeEvent<unknown>,
+    selectedPage: number
+  ) => {
+    setPage(selectedPage);
+  };
   useEffect(() => {
     dispatch(
       fetchProducts({
@@ -43,11 +49,13 @@ export const Market: React.FC = () => {
         ...filters,
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, filters]);
 
   useEffect(() => {
     dispatch(fetchBrands());
     dispatch(fetchTags());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className={styles.container}>
@@ -73,7 +81,7 @@ export const Market: React.FC = () => {
                         variant={"outlined"}
                         label={productType.label}
                         className={`${styles.type} ${
-                          productsType === productType.type
+                          selectedProductType === productType.type
                             ? styles.activeType
                             : ""
                         }`}
@@ -84,10 +92,14 @@ export const Market: React.FC = () => {
                   })}
                 </Stack>
               </Grid>
-              <ProductContent products={products} />
+              <ProductContent products={products.data} />
               <Grid item xs={12}>
-                <Stack className={styles.pagination} spacing={2}>
-                  <Pagination count={15} />
+                <Stack className={styles.pagination} spacing={1}>
+                  <Pagination
+                    count={Math.ceil(products.count / pageSize)}
+                    page={page}
+                    onChange={handleChangePage}
+                  />
                 </Stack>
               </Grid>
             </Grid>
