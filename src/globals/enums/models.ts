@@ -22,3 +22,19 @@ export interface IProduct {
   manufacturer: string;
   itemType: string;
 }
+
+export interface IFilterTypes {
+  brands: string[];
+  tags: string[];
+  itemType?: string;
+  sortType?: number
+  index: number;
+  pageSize: number;
+}
+
+export interface IProductFilters {
+  brands: string[];
+  tags: string[];
+  productsType?: string;
+  sortType?: number;
+}
