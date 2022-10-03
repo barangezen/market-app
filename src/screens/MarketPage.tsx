@@ -5,6 +5,7 @@ import { ProductFilter } from "../components/ProductFilter/ProductFilter";
 import { fetchBrands } from "../features/BrandsSlice/BrandSlice";
 import { fetchProducts } from "../features/ProductSlice/ProductSlice";
 import { fetchTags } from "../features/TagsSlice/TagsSlice";
+import { IFilterTypes, IProductFilters } from "../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../store";
 import styles from "./MarketPage.module.scss";
 interface TypeProps {
@@ -13,35 +14,47 @@ interface TypeProps {
   type: string;
 }
 
-
 export const Market: React.FC = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector(state => state.products)
-  const brands = useAppSelector(state => state.brands);
-  const tags = useAppSelector(state => state.tags);
-  console.log('tags', tags)
-  const [selectedType, setSelectedType] = useState("mug");
+  const products = useAppSelector((state) => state.products.data);
+  console.log(products);
+  const pageSize: number = 16;
+  const [page, setPage] = useState<number>(1);
+  const [filters, setFilters] = useState<IProductFilters>({
+    brands: [],
+    tags: [],
+  });
+  const [productsType, setProductsType] = useState("mug");
   const productTypes: TypeProps[] = [
     { id: "1", label: "Mug", type: "mug" },
     { id: "2", label: "Shirt", type: "shirt" },
   ];
   const handleChangeType = (type: string) => {
-    setSelectedType(type);
+    setProductsType(type);
   };
+  const handleFilters = (brands: string[], tags: string[], sortType?: number) => {
+    setFilters({ brands, tags, productsType , sortType})
+  }
   useEffect(() => {
-     dispatch(fetchProducts());
-     dispatch(fetchBrands());
-     dispatch(fetchTags());
-  
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  
+    dispatch(
+      fetchProducts({
+        index: page,
+        pageSize: pageSize,
+        ...filters,
+      })
+    );
+  }, [page, pageSize, filters]);
+
+  useEffect(() => {
+    dispatch(fetchBrands());
+    dispatch(fetchTags());
+  }, []);
   return (
     <div className={styles.container}>
       <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4} md={4} lg={3}>
-            <ProductFilter brands={brands.data} tags={tags.data} />
+            <ProductFilter />
           </Grid>
           <Grid item xs={12} sm={8} md={8} lg={6}>
             <Grid container spacing={0}>
@@ -60,7 +73,7 @@ export const Market: React.FC = () => {
                         variant={"outlined"}
                         label={productType.label}
                         className={`${styles.type} ${
-                          selectedType === productType.type
+                          productsType === productType.type
                             ? styles.activeType
                             : ""
                         }`}
@@ -71,7 +84,7 @@ export const Market: React.FC = () => {
                   })}
                 </Stack>
               </Grid>
-              <ProductContent />
+              <ProductContent products={products} />
               <Grid item xs={12}>
                 <Stack className={styles.pagination} spacing={2}>
                   <Pagination count={15} />

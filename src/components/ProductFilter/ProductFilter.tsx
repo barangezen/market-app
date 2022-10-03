@@ -1,20 +1,16 @@
 import { Grid } from "@mui/material";
-import { IBrand } from "../../globals/enums/models";
+import { useAppSelector } from "../../store";
 import { CheckboxFilter } from "../CheckboxFilter/CheckboxFilter";
 import { RadioFilter } from "../RadioFilter/RadioFilter";
-interface IProductFilter {
-  brands: IBrand[] | null;
-  tags: string[] | null;
-}
-export const ProductFilter: React.FC<IProductFilter> = ({
-  brands,
-  tags
-}) => {
+
+export const ProductFilter: React.FC = () => {
+  const brands = useAppSelector(state => state.brands);
+  const tags = useAppSelector(state => state.tags);
   return (
     <Grid container spacing={2}>
       <RadioFilter />
-      <CheckboxFilter items={brands} title={"Brands"} placeholder={"Brands"} />
-      <CheckboxFilter items={tags} title={"Tags"} placeholder={"Tags"} />
+      <CheckboxFilter items={brands.data} title={"Brands"} placeholder={"Brands"} />
+      <CheckboxFilter items={tags.data} title={"Tags"} placeholder={"Tags"} />
     </Grid>
   );
 };
