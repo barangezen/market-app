@@ -8,7 +8,9 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { useState } from "react";
+import { setSortType } from "../../features/FilterSlice/FilterSlice";
 import { SortingEnum } from "../../globals/enums/enums";
+import { useAppDispatch } from "../../store";
 import styles from "./RadioFilter.module.scss";
 
 interface Sorting {
@@ -25,8 +27,10 @@ export const RadioFilter: React.FC = () => {
   const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(
     null
   );
+  const dispatch = useAppDispatch();
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(Number(event.target.value));
+    dispatch(setSortType(Number(event.target.value)));
   };
   return (
     <Grid item xs={12}>

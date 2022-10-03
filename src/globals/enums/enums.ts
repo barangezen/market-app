@@ -1,5 +1,5 @@
 export enum SortingEnum {
-    PriceAsc,
+    PriceAsc=1,
     PriceDesc,
     DateDesc,
     DateAsc,

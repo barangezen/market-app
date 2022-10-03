@@ -26,8 +26,8 @@ export interface IProduct {
 export interface IFilterTypes {
   brands: string[];
   tags: string[];
-  itemType?: string;
-  sortType?: number
+  itemType?: string | null;
+  sortType?: number | null
   index: number;
   pageSize: number;
 }

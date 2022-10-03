@@ -1,4 +1,4 @@
-import { Product } from "../components/Product/Product";
+
 import { SortingEnum } from "../globals/enums/enums";
 import { IFilterTypes, IProduct } from "../globals/enums/models";
 
@@ -15,8 +15,9 @@ export const filterData = (filterValues: IFilterTypes, data: IProduct[]) => {
   }
   if (filterValues.tags.length) {
     data = data.filter((product: IProduct) => 
-      product.tags.filter((tag) => filterValues.tags.includes(tag))
-    );
+      product.tags.filter((tag) => filterValues.tags.includes(tag)).length
+    )
+    console.log('filteredData',data);
   }
   if (filterValues.sortType) {
     switch (filterValues.sortType) {
