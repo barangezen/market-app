@@ -16,7 +16,7 @@ interface TypeProps {
 
 export const Market: React.FC = () => {
   const dispatch = useAppDispatch();
-  const products = useAppSelector((state) => state.products.data);
+  const products = useAppSelector((state) => state.products);
   console.log(products);
   const pageSize: number = 16;
   const [page, setPage] = useState<number>(1);
@@ -35,6 +35,9 @@ export const Market: React.FC = () => {
   const handleFilters = (brands: string[], tags: string[], sortType?: number) => {
     setFilters({ brands, tags, productsType , sortType})
   }
+  const handleChangePage = (event: React.ChangeEvent<unknown>, selectedPage: number) => {
+    setPage(selectedPage);
+  }
   useEffect(() => {
     dispatch(
       fetchProducts({
@@ -43,12 +46,15 @@ export const Market: React.FC = () => {
         ...filters,
       })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page, pageSize, filters]);
 
   useEffect(() => {
     dispatch(fetchBrands());
     dispatch(fetchTags());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log('count', products.count);
   return (
     <div className={styles.container}>
       <Box sx={{ flexGrow: 1 }}>
@@ -84,10 +90,10 @@ export const Market: React.FC = () => {
                   })}
                 </Stack>
               </Grid>
-              <ProductContent products={products} />
+              <ProductContent products={products.data} />
               <Grid item xs={12}>
-                <Stack className={styles.pagination} spacing={2}>
-                  <Pagination count={15} />
+                <Stack className={styles.pagination} spacing={1}>
+                  <Pagination count={Math.ceil(products.count/pageSize)} page={page} onChange={handleChangePage}/>
                 </Stack>
               </Grid>
             </Grid>
