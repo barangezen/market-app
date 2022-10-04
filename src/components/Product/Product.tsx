@@ -3,7 +3,7 @@ import ShirPoster from "../../assets/shirt.png";
 import MugPoster from "../../assets/mug.png";
 import { ICartItem, IProduct } from "../../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { addItem, updateItem } from "../../features/CartSlice/CartSlice";
+import { addItem, updateItem } from "../../features/CartSlice/cartSlice";
 import { Button } from "@mui/material";
 import { useCallback } from "react";
 
