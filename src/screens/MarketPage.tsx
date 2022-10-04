@@ -92,7 +92,10 @@ export const Market: React.FC = () => {
                   })}
                 </Stack>
               </Grid>
-              <ProductContent products={products.data} />
+              {products.data && products.data?.length > 0 ? (
+                <ProductContent products={products.data} />
+              ) : <div>No products</div>}
+              
               <Grid item xs={12}>
                 <Stack className={styles.pagination} spacing={1}>
                   <Pagination
