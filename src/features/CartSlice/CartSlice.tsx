@@ -4,9 +4,11 @@ import { ICartItem } from "../../globals/enums/models";
 interface ICartState {
   addedItems: ICartItem[];
 }
+
 const initialState: ICartState = {
   addedItems: [],
 };
+
 const cartSlice = createSlice({
   name: "cart",
   initialState,

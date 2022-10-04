@@ -22,19 +22,21 @@ export const CheckboxFilter: React.FC<IFilter> = ({
   placeholder,
   type,
 }) => {
-  const [searchFilter, setSearchFilter] = useState<string>("");
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.filters);
+  const [searchFilter, setSearchFilter] = useState<string>("");
   const selectedItems = filters[type];
-  const filteredSearchItems = useMemo(
-    () =>
+
+  const filteredSearchItems = useMemo(() =>
       items?.filter((item) =>
         item.toLocaleUpperCase().includes(searchFilter.toLocaleUpperCase())
       ),
     [searchFilter, items]
   );
+
   const handleSelectChange = useCallback( (item: string) => {
     const setSelectedItems = type === "tags" ? setTags : setBrands;
+
     if (selectedItems.includes(item)) {
       dispatch(
         setSelectedItems(
@@ -47,6 +49,7 @@ export const CheckboxFilter: React.FC<IFilter> = ({
     //For missing dispatch dependency
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedItems, type]);
+
   return (
     <Grid item xs={12}>
       <div className={styles.title}>{title}</div>

@@ -13,8 +13,10 @@ export interface ProductItem {
 export const Product: React.FC<ProductItem> = ({ item }) => {
   const basketItems = useAppSelector((state) => state.cart.addedItems);
   const dispatch = useAppDispatch();
+ 
   const handleAddToCart = useCallback (() => {
     const exist = basketItems.find((basketItem) => basketItem.name === item.name);
+
     if (exist) {
       const postItem: ICartItem = { ...exist, quantity: exist?.quantity + 1 };
       dispatch(updateItem(postItem));
@@ -29,6 +31,7 @@ export const Product: React.FC<ProductItem> = ({ item }) => {
     //For missing dispatch dependency
   // eslint-disable-next-line react-hooks/exhaustive-deps 
   }, [basketItems, item.name, item.price]);
+
   return (
     <div className={styles.productContainer}>
       <div className={styles.posterContainer}>

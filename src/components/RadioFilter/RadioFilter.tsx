@@ -17,19 +17,23 @@ interface ISortTypes {
   id: SortingEnum;
   label: string;
 }
+
 const filterData: ISortTypes[] = [
   { id: SortingEnum.PriceAsc, label: "Price low to high" },
   { id: SortingEnum.PriceDesc, label: "Price high to low" },
   { id: SortingEnum.DateDesc, label: "New to old" },
   { id: SortingEnum.DateAsc, label: "Old to new" },
 ];
+
 export const RadioFilter = () => {
   const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(null);
   const dispatch = useAppDispatch();
+  
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(Number(event.target.value));
     dispatch(setSortType(Number(event.target.value)));
   };
+
   return (
     <Grid item xs={12}>
       <div className={styles.title}>Sorting</div>

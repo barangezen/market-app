@@ -7,18 +7,22 @@ import { useAppSelector } from "../../store";
 
 export const Header = () => {
   const basketItems = useAppSelector((state) => state.cart.addedItems);
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+
   const totalPrice = useMemo(() => {
     return basketItems
       .reduce((a, b) => a + (b.quantity * b.price || 0), 0)
       .toFixed(2);
   }, [basketItems]);
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+
   const handleCloseOpenMenu = () => {
     setAnchorElNav(null);
   };
+  
   return (
     <div className={styles.header}>
       <Button

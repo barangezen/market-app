@@ -9,6 +9,7 @@ export const BasketItem: React.FC<ICartItem> = ({ name, price, quantity }) => {
   const basketList: ICartItem[] = useAppSelector(
     (state) => state.cart.addedItems
   );
+
   const handleUpdateQuantity = (itemName: string, number: number) => {
     let exist = basketList.find((basketItem) => basketItem.name === itemName);
     if (exist) {
@@ -19,6 +20,7 @@ export const BasketItem: React.FC<ICartItem> = ({ name, price, quantity }) => {
       dispatch(updateItem(postItem));
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.productDetail}>
