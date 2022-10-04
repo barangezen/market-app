@@ -14,18 +14,20 @@ interface TypeProps {
   type: string;
 }
 
-export const Market: React.FC = () => {
+const PAGE_SIZE = 16;
+
+export const Market = () => {
   const products = useAppSelector((state) => state.products);
   const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
-  const pageSize: number = 16;
-  const pageCount = Math.ceil(products.count / pageSize);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState(1);
   const [selectedProductType, setSelectedProductType] = useState("");
+  const pageCount = Math.ceil(products.count / PAGE_SIZE);
   const productTypes: TypeProps[] = [
     { id: "1", label: "Mug", type: "mug" },
     { id: "2", label: "Shirt", type: "shirt" },
   ];
+
   const handleChangeType = (type: string) => {
     if (selectedProductType === type) {
       setSelectedProductType("");
@@ -35,28 +37,31 @@ export const Market: React.FC = () => {
       dispatch(setItemType(type));
     }
   };
+
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
     selectedPage: number
   ) => {
     setPage(selectedPage);
   };
+
   useEffect(() => {
     dispatch(
       fetchProducts({
         index: page,
-        pageSize: pageSize,
+        pageSize: PAGE_SIZE,
         ...filters,
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, pageSize, filters]);
+  }, [page, PAGE_SIZE, filters]);
 
   useEffect(() => {
     dispatch(fetchBrands());
     dispatch(fetchTags());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
   return (
     <div className={styles.container}>
       <Box sx={{ flexGrow: 1 }}>

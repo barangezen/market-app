@@ -8,6 +8,7 @@ export const Loader: React.FC<ILoader> = ({ children }) => {
   const productsLoader = useAppSelector((state) => state.products.loading);
   const brandsLoader = useAppSelector((state) => state.brands.loading);
   const tagsLoader = useAppSelector((state) => state.tags.loading);
+  
   return (
     <BlockUi tag="div" blocking={productsLoader || brandsLoader || tagsLoader}>
       {children}

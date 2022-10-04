@@ -1,5 +1,6 @@
 {
   "name": "market-client",
+  "author": "Baran Gezenoglu",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
