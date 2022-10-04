@@ -1,12 +1,12 @@
 import { FormControl, Input, InputAdornment } from "@mui/material";
-import {  updateItem } from "../../features/CartSlice/CartSlice";
+import { updateItem } from "../../features/CartSlice/CartSlice";
 import { ICartItem } from "../../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../../store";
 import styles from "./BasketItem.module.scss";
 
 export const BasketItem: React.FC<ICartItem> = ({ name, price, quantity }) => {
   const dispatch = useAppDispatch();
-  const basketList = useAppSelector((state) => state.cart.addedItems);
+  const basketList: ICartItem[] = useAppSelector((state) => state.cart.addedItems);
   const handleUpdateQuantity = (itemName: string, number: number) => {
     let exist = basketList.find((basketItem) => basketItem.name === itemName);
     if (exist) {

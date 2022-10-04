@@ -48,25 +48,33 @@ export const CheckboxFilter: React.FC<IFilter> = ({
               className={styles.textField}
               variant="outlined"
               placeholder={placeholder}
-              onChange={(ev) => {setSearchFilter(ev.target.value)}}
+              onChange={(ev) => {
+                setSearchFilter(ev.target.value);
+              }}
             />
             <div className={styles.formContainer}>
               {items &&
-                items.filter((item) => item.toLocaleUpperCase().includes(searchFilter.toLocaleUpperCase())).map((item: any, index: any) => {
-                  return (
-                    <FormGroup key={index}>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={reduxSelectedItems.includes(item)}
-                            onChange={(e) => handleSelectChange(item)}
-                          />
-                        }
-                        label={item.name ? item.name : item}
-                      />
-                    </FormGroup>
-                  );
-                })}
+                items
+                  .filter((item) =>
+                    item
+                      .toLocaleUpperCase()
+                      .includes(searchFilter.toLocaleUpperCase())
+                  )
+                  .map((item: string, index: number) => {
+                    return (
+                      <FormGroup key={index}>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              checked={reduxSelectedItems.includes(item)}
+                              onChange={(e) => handleSelectChange(item)}
+                            />
+                          }
+                          label={item}
+                        />
+                      </FormGroup>
+                    );
+                  })}
             </div>
           </div>
         </div>
