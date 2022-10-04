@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import productsReducer from "../features/ProductSlice/ProductSlice";
-import brandsReducer from "../features/BrandsSlice/BrandSlice";
-import tagsReducer from "../features/TagsSlice/TagsSlice";
-import filtersReducer from "../features/FilterSlice/FilterSlice";
-import cartReducer from "../features/CartSlice/CartSlice";
+import productsReducer from "../features/ProductSlice/productSlice";
+import brandsReducer from "../features/BrandsSlice/brandSlice";
+import tagsReducer from "../features/TagsSlice/tagsSlice";
+import filtersReducer from "../features/FilterSlice/filterSlice";
+import cartReducer from "../features/CartSlice/cartSlice";
 export const store = configureStore({
   reducer: {
     products: productsReducer,

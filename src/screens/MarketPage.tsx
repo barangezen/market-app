@@ -2,10 +2,10 @@ import { Box, Chip, Grid, Pagination, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { ProductContent } from "../components/ProductContent/ProductContent";
 import { ProductFilter } from "../components/ProductFilter/ProductFilter";
-import { fetchBrands } from "../features/BrandsSlice/BrandSlice";
-import { setItemType } from "../features/FilterSlice/FilterSlice";
-import { fetchProducts } from "../features/ProductSlice/ProductSlice";
-import { fetchTags } from "../features/TagsSlice/TagsSlice";
+import { fetchBrands } from "../features/BrandsSlice/brandSlice";
+import { setItemType } from "../features/FilterSlice/filterSlice";
+import { fetchProducts } from "../features/ProductSlice/productSlice";
+import { fetchTags } from "../features/TagsSlice/tagsSlice";
 import { useAppDispatch, useAppSelector } from "../store";
 import styles from "./MarketPage.module.scss";
 interface TypeProps {
