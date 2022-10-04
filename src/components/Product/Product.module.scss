@@ -40,5 +40,10 @@
     border-radius: 2px;
     cursor: pointer;
     bottom: 1px;
+    text-transform: none;
+
+    &:hover {
+      background-color: #177F9F ;
+    }
   }
 }

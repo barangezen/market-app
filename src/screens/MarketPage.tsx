@@ -19,21 +19,21 @@ export const Market: React.FC = () => {
   const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
   const pageSize: number = 16;
+  const pageCount = Math.ceil(products.count / pageSize)
   const [page, setPage] = useState<number>(1);
-  const [selectedProductType, setSelectedProductType] = useState('');
+  const [selectedProductType, setSelectedProductType] = useState("");
   const productTypes: TypeProps[] = [
     { id: "1", label: "Mug", type: "mug" },
     { id: "2", label: "Shirt", type: "shirt" },
   ];
   const handleChangeType = (type: string) => {
-    if(selectedProductType === type) {
-      setSelectedProductType('');
-      dispatch(setItemType(''))
+    if (selectedProductType === type) {
+      setSelectedProductType("");
+      dispatch(setItemType(""));
     } else {
       setSelectedProductType(type);
-      dispatch(setItemType(type))
+      dispatch(setItemType(type));
     }
-  
   };
   const handleChangePage = (
     event: React.ChangeEvent<unknown>,
@@ -94,15 +94,19 @@ export const Market: React.FC = () => {
               </Grid>
               {products.data && products.data?.length > 0 ? (
                 <ProductContent products={products.data} />
-              ) : <div>No products</div>}
-              
+              ) : (
+                <div>No products</div>
+              )}
+
               <Grid item xs={12}>
                 <Stack className={styles.pagination} spacing={1}>
-                  <Pagination
-                    count={Math.ceil(products.count / pageSize)}
-                    page={page}
-                    onChange={handleChangePage}
-                  />
+                  {pageCount > 1 && (
+                    <Pagination
+                      count={pageCount}
+                      page={page}
+                      onChange={handleChangePage}
+                    />
+                  )}
                 </Stack>
               </Grid>
             </Grid>

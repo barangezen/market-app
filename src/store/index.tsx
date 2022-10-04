@@ -4,12 +4,14 @@ import productsReducer from '../features/ProductSlice/ProductSlice';
 import brandsReducer from '../features/BrandsSlice/BrandSlice';
 import tagsReducer from '../features/TagsSlice/TagsSlice';
 import filtersReducer from '../features/FilterSlice/FilterSlice'
+import cartReducer from '../features/CartSlice/CartSlice';
 export const store = configureStore({
     reducer: {
         products: productsReducer,
         brands: brandsReducer,
         tags: tagsReducer,
-        filters: filtersReducer
+        filters: filtersReducer,
+        cart: cartReducer
     }
 });
 

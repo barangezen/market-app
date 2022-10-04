@@ -38,3 +38,9 @@ export interface IProductFilters {
   productsType?: string;
   sortType?: number;
 }
+
+export interface ICartItem {
+  name: string;
+  quantity: number,
+  price: number;
+}
