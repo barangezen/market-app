@@ -3,7 +3,6 @@ import { BasketItem } from "../BasketItem/BasketItem";
 import styles from "./BasketMenu.module.scss";
 export const BasketMenu: React.FC = () => {
   const basketItems = useAppSelector((state) => state.cart.addedItems);
-  console.log("basketItems", basketItems);
   const displayMenuContent = () => {
     if (basketItems.length > 0) {
       return basketItems.map((item, index) => {

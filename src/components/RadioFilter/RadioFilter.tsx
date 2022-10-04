@@ -24,9 +24,7 @@ const filterData: Sorting[] = [
   { id: SortingEnum.DateAsc, label: "Old to new" },
 ];
 export const RadioFilter: React.FC = () => {
-  const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(
-    null
-  );
+  const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(null);
   const dispatch = useAppDispatch();
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedSort(Number(event.target.value));

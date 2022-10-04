@@ -10,10 +10,10 @@
     width: 70%;
     float: left;
     .name {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 190px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 190px;
     }
     .price {
       margin-top: 10px;
@@ -31,9 +31,9 @@
       line-height: 50px;
       border: none !important;
       outline: none !important;
-        .input{
-            text-align: center;
-        }
+      .input {
+        text-align: center;
+      }
       .formInput {
         height: 75px;
         text-align: center;

@@ -19,7 +19,7 @@ export const Market: React.FC = () => {
   const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
   const pageSize: number = 16;
-  const pageCount = Math.ceil(products.count / pageSize)
+  const pageCount = Math.ceil(products.count / pageSize);
   const [page, setPage] = useState<number>(1);
   const [selectedProductType, setSelectedProductType] = useState("");
   const productTypes: TypeProps[] = [

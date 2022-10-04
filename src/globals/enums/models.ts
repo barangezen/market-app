@@ -27,7 +27,7 @@ export interface IFilterTypes {
   brands: string[];
   tags: string[];
   itemType?: string | null;
-  sortType?: number | null
+  sortType?: number | null;
   index: number;
   pageSize: number;
 }
@@ -41,6 +41,6 @@ export interface IProductFilters {
 
 export interface ICartItem {
   name: string;
-  quantity: number,
+  quantity: number;
   price: number;
 }
