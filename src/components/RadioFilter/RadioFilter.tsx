@@ -8,7 +8,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { useState } from "react";
-import { setSortType } from "../../features/FilterSlice/FilterSlice";
+import { setSortType } from "../../features/FilterSlice/filterSlice";
 import { SortingEnum } from "../../globals/enums/enums";
 import { useAppDispatch } from "../../store";
 import styles from "./RadioFilter.module.scss";

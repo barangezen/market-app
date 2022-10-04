@@ -1,5 +1,5 @@
 import { FormControl, Input, InputAdornment } from "@mui/material";
-import { updateItem } from "../../features/CartSlice/CartSlice";
+import { updateItem } from "../../features/CartSlice/cartSlice";
 import { ICartItem } from "../../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../../store";
 import styles from "./BasketItem.module.scss";

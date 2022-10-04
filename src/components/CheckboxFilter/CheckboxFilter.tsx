@@ -7,7 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { useCallback, useMemo, useState } from "react";
-import { setBrands, setTags } from "../../features/FilterSlice/FilterSlice";
+import { setBrands, setTags } from "../../features/FilterSlice/filterSlice";
 import { useAppDispatch, useAppSelector } from "../../store";
 import styles from "./CheckboxFilter.module.scss";
 interface IFilter {
