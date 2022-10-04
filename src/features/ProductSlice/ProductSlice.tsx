@@ -20,7 +20,7 @@ const initialState: IProductsState = {
 export const fetchProducts = createAsyncThunk(
   "fetchProducts",
   async (filterValue: IFilterTypes) => {
-    const response = await axios.get<IProduct[]>("http://localhost:3001/items");
+    const response = await axios.get<IProduct[]>("http://localhost:8000/items");
     let data: IProduct[] = response.data;
 
     const productTypes = data
