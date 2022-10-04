@@ -1,4 +1,3 @@
-
 import { SortingEnum } from "../globals/enums/enums";
 import { IFilterTypes, IProduct } from "../globals/enums/models";
 
@@ -14,33 +13,33 @@ export const filterData = (filterValues: IFilterTypes, data: IProduct[]) => {
     );
   }
   if (filterValues.tags.length) {
-    data = data.filter((product: IProduct) => 
-      product.tags.filter((tag) => filterValues.tags.includes(tag)).length
-    )
-    console.log('filteredData',data);
+    data = data.filter(
+      (product: IProduct) =>
+        product.tags.filter((tag) => filterValues.tags.includes(tag)).length
+    );
   }
   if (filterValues.sortType) {
     switch (filterValues.sortType) {
-      case SortingEnum.PriceAsc: 
+      case SortingEnum.PriceAsc:
         data = data.sort((a, b) => {
-            if (a.price < b.price) {
-                return -1
-            }
-            if (a.price > b.price) {
-                return 1
-            }
-            return 0;
+          if (a.price < b.price) {
+            return -1;
+          }
+          if (a.price > b.price) {
+            return 1;
+          }
+          return 0;
         });
         break;
-        case SortingEnum.PriceDesc: 
+      case SortingEnum.PriceDesc:
         data = data.sort((a, b) => {
-            if (a.price < b.price) {
-                return 1
-            }
-            if (a.price > b.price) {
-                return -1
-            }
-            return 0;
+          if (a.price < b.price) {
+            return 1;
+          }
+          if (a.price > b.price) {
+            return -1;
+          }
+          return 0;
         });
         break;
       case SortingEnum.DateAsc:
@@ -54,7 +53,7 @@ export const filterData = (filterValues: IFilterTypes, data: IProduct[]) => {
           return 0;
         });
         break;
-        case SortingEnum.DateDesc:
+      case SortingEnum.DateDesc:
         data = data.sort((a, b) => {
           if (a.added < b.added) {
             return 1;

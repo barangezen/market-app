@@ -1,38 +1,33 @@
-import { BasketItem, IBasketItem } from "../BasketItem/BasketItem";
+import { useAppSelector } from "../../store";
+import { BasketItem } from "../BasketItem/BasketItem";
 import styles from "./BasketMenu.module.scss";
 export const BasketMenu: React.FC = () => {
-  const basket: IBasketItem[] = [
-    {
-      productName: "Motul C4 Motorsiklet Zincir Yağı ",
-      productPrice: 167,
-      productQuantity: 1,
-    },
-    {
-      productName: "Motul C1 Chain Clean / Zincir Temizleme Spreyi",
-      productPrice: 135.3,
-      productQuantity: 1,
-    },
-    {
-      productName: "Bikelift Motosiklet Krikosu -",
-      productPrice: 472,
-      productQuantity: 2,
-    },
-  ];
+  const basketItems = useAppSelector((state) => state.cart.addedItems);
+  console.log("basketItems", basketItems);
+  const displayMenuContent = () => {
+    if (basketItems.length > 0) {
+      return basketItems.map((item, index) => {
+        return (
+          <BasketItem
+            key={index}
+            name={item.name}
+            price={item.price}
+            quantity={item.quantity}
+          />
+        );
+      });
+    } else {
+      return <p>Basket is Empty</p>;
+    }
+  };
   return (
     <div className={styles.container}>
-      <div className={styles.itemContainer}>
-        {basket.map((item, index) => {
-          return (
-            <BasketItem
-              key={index}
-              productName={item.productName}
-              productPrice={item.productPrice}
-              productQuantity={item.productQuantity}
-            />
-          );
-        })}
-        <div className={styles.priceContainer}>₺39,97</div>
-      </div>
+      <div className={styles.itemContainer}>{displayMenuContent()}</div>
+      {basketItems.length > 0 && (
+        <div className={styles.priceContainer}>{`₺${basketItems
+          .reduce((a, b) => a + (b.quantity * b.price || 0), 0)
+          .toFixed(2)}`}</div>
+      )}
     </div>
   );
 };
