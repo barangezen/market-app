@@ -11,9 +11,9 @@ export const ProductContent: React.FC<IProductContent> = ({ products }) => {
     <Card className={styles.container} sx={{ minWidth: "100%" }}>
       <Grid container spacing={0}>
         {products &&
-          products.map((product, index) => {
+          products.map((product) => {
             return (
-              <Grid key={index} item xs={12} sm={4} md={3}>
+              <Grid key={product.added} item xs={12} sm={4} md={3}>
                 <Product item={product} />
               </Grid>
             );

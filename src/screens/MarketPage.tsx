@@ -14,13 +14,13 @@ interface TypeProps {
   type: string;
 }
 
-export const Market: React.FC = () => {
+export const Market = () => {
   const products = useAppSelector((state) => state.products);
   const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDispatch();
-  const pageSize: number = 16;
+  const pageSize = 16;
   const pageCount = Math.ceil(products.count / pageSize);
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState(1);
   const [selectedProductType, setSelectedProductType] = useState("");
   const productTypes: TypeProps[] = [
     { id: "1", label: "Mug", type: "mug" },

@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ShoppingBag } from "@mui/icons-material";
 import { Button, Menu } from "@mui/material";
 import styles from "./Header.module.scss";
 import { BasketMenu } from "../BasketMenu/BasketMenu";
 import { useAppSelector } from "../../store";
 
-export const Header: React.FC = () => {
+export const Header = () => {
   const basketItems = useAppSelector((state) => state.cart.addedItems);
+  const totalPrice = useMemo(() => {
+    return basketItems
+      .reduce((a, b) => a + (b.quantity * b.price || 0), 0)
+      .toFixed(2);
+  }, [basketItems]);
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const handleOpenMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -24,9 +29,7 @@ export const Header: React.FC = () => {
         onClick={handleOpenMenu}
       >
         <ShoppingBag />{" "}
-        {`₺${basketItems
-          .reduce((a, b) => a + (b.quantity * b.price || 0), 0)
-          .toFixed(2)}`}
+        {`₺${totalPrice}`}
       </Button>
       <Menu
         id="basket-menu"

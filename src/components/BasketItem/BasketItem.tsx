@@ -6,7 +6,9 @@ import styles from "./BasketItem.module.scss";
 
 export const BasketItem: React.FC<ICartItem> = ({ name, price, quantity }) => {
   const dispatch = useAppDispatch();
-  const basketList: ICartItem[] = useAppSelector((state) => state.cart.addedItems);
+  const basketList: ICartItem[] = useAppSelector(
+    (state) => state.cart.addedItems
+  );
   const handleUpdateQuantity = (itemName: string, number: number) => {
     let exist = basketList.find((basketItem) => basketItem.name === itemName);
     if (exist) {

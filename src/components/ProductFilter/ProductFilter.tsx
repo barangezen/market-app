@@ -3,7 +3,7 @@ import { useAppSelector } from "../../store";
 import { CheckboxFilter } from "../CheckboxFilter/CheckboxFilter";
 import { RadioFilter } from "../RadioFilter/RadioFilter";
 
-export const ProductFilter: React.FC = () => {
+export const ProductFilter = () => {
   const brands = useAppSelector((state) => state.brands);
   const tags = useAppSelector((state) => state.tags);
 

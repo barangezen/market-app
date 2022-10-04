@@ -5,6 +5,7 @@ import { ICartItem, IProduct } from "../../globals/enums/models";
 import { useAppDispatch, useAppSelector } from "../../store";
 import { addItem, updateItem } from "../../features/CartSlice/CartSlice";
 import { Button } from "@mui/material";
+import { useCallback } from "react";
 
 export interface ProductItem {
   item: IProduct;
@@ -12,20 +13,22 @@ export interface ProductItem {
 export const Product: React.FC<ProductItem> = ({ item }) => {
   const basketItems = useAppSelector((state) => state.cart.addedItems);
   const dispatch = useAppDispatch();
-  const handleAddToCart = (data: IProduct) => {
-    let exist = basketItems.find((item) => item.name === data.name);
+  const handleAddToCart = useCallback (() => {
+    const exist = basketItems.find((basketItem) => basketItem.name === item.name);
     if (exist) {
-      let postItem: ICartItem = { ...exist, quantity: exist?.quantity + 1 };
+      const postItem: ICartItem = { ...exist, quantity: exist?.quantity + 1 };
       dispatch(updateItem(postItem));
     } else {
-      let postItem: ICartItem = {
-        name: data.name,
-        price: data.price,
+      const postItem: ICartItem = {
+        name: item.name,
+        price: item.price,
         quantity: 1,
       };
       dispatch(addItem(postItem));
     }
-  };
+    //For missing dispatch dependency
+  // eslint-disable-next-line react-hooks/exhaustive-deps 
+  }, [basketItems, item.name, item.price]);
   return (
     <div className={styles.productContainer}>
       <div className={styles.posterContainer}>
@@ -40,7 +43,7 @@ export const Product: React.FC<ProductItem> = ({ item }) => {
       <Button
         className={styles.addBtn}
         type="button"
-        onClick={() => handleAddToCart(item)}
+        onClick={handleAddToCart}
       >
         Add
       </Button>

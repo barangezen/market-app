@@ -13,17 +13,17 @@ import { SortingEnum } from "../../globals/enums/enums";
 import { useAppDispatch } from "../../store";
 import styles from "./RadioFilter.module.scss";
 
-interface Sorting {
+interface ISortTypes {
   id: SortingEnum;
   label: string;
 }
-const filterData: Sorting[] = [
+const filterData: ISortTypes[] = [
   { id: SortingEnum.PriceAsc, label: "Price low to high" },
   { id: SortingEnum.PriceDesc, label: "Price high to low" },
   { id: SortingEnum.DateDesc, label: "New to old" },
   { id: SortingEnum.DateAsc, label: "Old to new" },
 ];
-export const RadioFilter: React.FC = () => {
+export const RadioFilter = () => {
   const [selectedSort, setSelectedSort] = useState<SortingEnum | null>(null);
   const dispatch = useAppDispatch();
   const handleSortChange = (event: React.ChangeEvent<HTMLInputElement>) => {
