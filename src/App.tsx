@@ -7,14 +7,12 @@ import { Market } from "./screens/MarketPage";
 import { store } from "./store/index";
 function App() {
   return (
-    <React.Fragment>
       <Provider store={store}>
         <Loader>
           <Header />
           <Market />
         </Loader>
       </Provider>
-    </React.Fragment>
   );
 }
 
