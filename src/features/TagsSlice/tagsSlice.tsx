@@ -14,7 +14,7 @@ const initialState: ITagsState = {
 };
 
 export const fetchTags = createAsyncThunk("fetchTags", async () => {
-  const response = await axios.get("http://localhost:8000/items");
+  const response = await axios.get("https://baran-market-app-backend.herokuapp.com/items");
   let data: IProduct[] = response.data;
   let tags: string[] = [];
 

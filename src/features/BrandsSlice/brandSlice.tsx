@@ -15,7 +15,7 @@ const initialState: IBrandsState = {
 };
 
 export const fetchBrands = createAsyncThunk("fetchBrands", async () => {
-  const response = await axios.get<IBrand[]>("http://localhost:8000/companies");
+  const response = await axios.get<IBrand[]>("https://baran-market-app-backend.herokuapp.com/companies");
   return response.data.map((brand) => {
     return brand.slug;
   });
