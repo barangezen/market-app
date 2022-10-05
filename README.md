@@ -1,6 +1,9 @@
 ## What is this project ?
 It's a basic market app. 
 
+Here is the live demo https://baran-market-app.herokuapp.com/
+
+Also you can check backend repo https://github.com/barangezen/market-app-backend
 ## Getting Started
 First, download packages and dependencies with :
 
